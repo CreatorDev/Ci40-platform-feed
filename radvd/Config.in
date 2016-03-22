@@ -1,3 +1,0 @@
-config RADVDUMP
-	bool "radvdump"
-	default n
