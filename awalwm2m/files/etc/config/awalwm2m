@@ -1,0 +1,4 @@
+BOOTSTRAP=coap://ws-uat.flowworld.com:15683
+INTERFACE=lowpan0
+ADDRESS_FAMILY=6
+VERBOSE=--verbose

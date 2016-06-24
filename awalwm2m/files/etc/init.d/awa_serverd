@@ -1,0 +1,23 @@
+#!/bin/sh /etc/rc.common
+
+START=98
+
+SERVICE_PID_FILE=/var/run/awa_serverd.pid
+BINARY=/bin/awa_serverd
+LOGFILE=/var/log/awa_serverd
+PORT=5683
+
+apply_global_settings() {
+	. /etc/config/awalwm2m
+}
+
+start() {
+	sleep 5
+	apply_global_settings
+	start-stop-daemon -m -S -p $SERVICE_PID_FILE -b -x $BINARY -- -l $LOGFILE --interface $INTERFACE --addressFamily $ADDRESS_FAMILY --port $PORT $VERBOSE
+}
+
+stop() {
+	start-stop-daemon -K -p $SERVICE_PID_FILE -s 15
+	rm -f $SERVICE_PID_FILE
+}

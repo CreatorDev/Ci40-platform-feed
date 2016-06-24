@@ -1,0 +1,100 @@
+#!/bin/sh
+
+LWM2M_CONFIG=/etc/config/lwm2m
+FLOW_CONFIG=/etc/lwm2m/bootstrap-contiki-flow-NAT64.config
+
+# hack to update the address of the flowcloud server in the bootstrap configuration
+# send to the constrained device, as this cannot look up the address itself
+# this requires an operational network interface.
+update_bootstrap_config() {
+
+        remove_entry_from_hosts_file $1
+
+        echo "Resolving $1"
+        ip4=`nslookup $1 | grep -v localhost | grep Addr | cut -f 3 -d " "`
+        if [ x"$ip4" == x ]; then
+            echo "ERROR: could not resolve address, make sure the cable is connected"
+            exit 1
+        fi
+        first=`echo ${ip4//./ } | cut -f 1-2 -d " "`
+        last=`echo ${ip4//./ } | cut -f 3-4 -d " "`
+        firsthex=`printf '%02x' $first ; echo`
+        lasthex=`printf '%02x' $last; echo`
+        NAT64_IP=`echo "2001:1418:200::$firsthex:$lasthex"`
+        echo "IPv6 address for $1 is $NAT64_IP"
+        echo "Updating $FLOW_CONFIG"
+
+        echo "ServerURI=coap://[$NAT64_IP]:5683/" > $FLOW_CONFIG
+        echo "SecurityMode=3" >> $FLOW_CONFIG
+        echo "PublicKey=[PublicKey]" >> $FLOW_CONFIG
+        echo "SecretKey=[SecretKey]" >> $FLOW_CONFIG
+        echo "ServerID=2" >> $FLOW_CONFIG
+        echo "HoldOffTime=30" >> $FLOW_CONFIG
+        echo "ShortServerID=2" >> $FLOW_CONFIG
+        echo "Binding=U" >> $FLOW_CONFIG
+        echo "LifeTime=60" >> $FLOW_CONFIG
+
+        update_hosts_file $ip4 $1
+}
+
+update_client_config()
+{
+    echo "Updating $LWM2M_CONFIG"
+    echo "BOOTSTRAP=coap://$1:15683" > $LWM2M_CONFIG
+    echo "INTERFACE=lowpan0" >> $LWM2M_CONFIG
+    echo "ADDRESS_FAMILY=6" >> $LWM2M_CONFIG
+    echo "VERBOSE=--verbose" >> $LWM2M_CONFIG
+}
+
+remove_entry_from_hosts_file()
+{
+    sed -ri "/^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+[[:space:]]$1/d" /etc/hosts
+}
+
+# the DNS server on the NUC tells the dnsmasq service on the Ci40 not
+# to cache, this causes very very long DNS resolution times
+# as a work around we will write the server address into the /etc/hosts file
+update_hosts_file()
+{
+    if grep -q "$2" /etc/hosts; then
+        sed -ri "s/^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+( +$2)/$1\1/" /etc/hosts
+    else
+        echo "$1 $2" >> /etc/hosts
+    fi
+}
+
+restart_daemons()
+{
+    echo "Restarting daemons"
+    /etc/init.d/lwm2m_clientd stop
+    /etc/init.d/lwm2m_clientd stop
+    /etc/init.d/lwm2m_clientd start
+    /etc/init.d/lwm2m_serverd stop
+    /etc/init.d/lwm2m_serverd start
+    /etc/init.d/lwm2m_bootstrapd stop
+    /etc/init.d/lwm2m_bootstrapd start
+
+}
+
+echo "--------------------------------------------------------------"
+echo " CES demo setup script "
+echo "--------------------------------------------------------------"
+echo "This script will setup the Ci40 configuration for the CES demo"
+echo "This will replace the values in $LWM2M_CONFIG and $FLOW_CONFIG"
+echo -n "If you don't want to do this, press ctrl^C now or press [ENTER] to continue:"
+read
+
+echo -n "Make sure the network cable is connected and press [ENTER]:"
+read
+
+echo -n  "Enter the flowcloud lwm2m server domain name [dm-ondemand.flowcloud.systems]:"
+read FLOW_ADDR
+if [ x"$FLOW_ADDR" == x ]; then
+    FLOW_ADDR=dm-ondemand.flowcloud.systems
+fi
+
+update_bootstrap_config $FLOW_ADDR
+update_client_config $FLOW_ADDR
+restart_daemons
+echo "Done."
+
