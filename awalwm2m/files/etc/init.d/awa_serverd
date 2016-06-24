@@ -3,7 +3,7 @@
 START=98
 
 SERVICE_PID_FILE=/var/run/awa_serverd.pid
-BINARY=/bin/awa_serverd
+BINARY=/usr/bin/awa_serverd
 LOGFILE=/var/log/awa_serverd
 PORT=5683
 

@@ -3,7 +3,7 @@
 START=98
 
 SERVICE_PID_FILE=/var/run/awa_bootstrapd.pid
-BINARY=/bin/awa_bootstrapd
+BINARY=/usr/bin/awa_bootstrapd
 LOGFILE=/var/log/awa_bootstrapd
 LOCAL_CONFIG=/etc/lwm2m/bootstrap-contiki.config
 FLOW_CONFIG=/etc/lwm2m/bootstrap-contiki-flow-NAT64.config
