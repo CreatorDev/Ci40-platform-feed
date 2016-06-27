@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 PKG_NAME:=awalwm2m
-PKG_VERSION:=0.1.7
+PKG_VERSION:=0.1.10
 #PKG_VERSION:=master
 PKG_RELEASE:=1
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
@@ -26,8 +26,8 @@ define Package/awalwm2m/description
 endef
 
 define Package/awalwm2m/install
-	$(INSTALL_DIR) $(1)/bin/
-	$(CP) $(PKG_INSTALL_DIR)/bin/* $(1)/bin/
+	$(INSTALL_DIR) $(1)/usr/bin/
+	$(CP) $(PKG_INSTALL_DIR)/bin/* $(1)/usr/bin/
 	$(INSTALL_DIR) $(1)/usr/lib/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/* $(1)/usr/lib/
 	$(INSTALL_DIR) $(1)/usr/include/
