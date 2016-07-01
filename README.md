@@ -15,6 +15,7 @@ cgilua            | This package has been added to use webscripts using lua page
 click-apps        | This package contains click applications.
 fping             | This program is used to send ICMP echo probes to network hosts, similar to ping.
 glog              | This package contains a C++ implementation of the Google logging.
+proddata          | This package provides Proddata tool used to read/write/lock OTP.
 u-boot            | This package is used for u-boot bootloader for pistachio marduk platform.
 
 Command                                         | Description

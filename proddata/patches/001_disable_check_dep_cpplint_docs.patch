@@ -1,0 +1,22 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 23cf5e3..2e3dea4 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -31,8 +31,8 @@ IF(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
+   ENDIF()
+ ENDIF()
+ 
+-INCLUDE(check_dep)
+-INCLUDE(cpplint)
++#INCLUDE(check_dep)
++#INCLUDE(cpplint)
+ 
+ # Paths
+ ########
+@@ -47,5 +47,5 @@ IF(BUILD_TESTS)
+     ADD_SUBDIRECTORY(utest)
+   ENDIF()
+ ENDIF()
+-ADD_SUBDIRECTORY(docs)
++#ADD_SUBDIRECTORY(docs)
+ 
