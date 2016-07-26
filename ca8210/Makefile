@@ -2,8 +2,12 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=ca8210
-PKG_RELEASE:=0.2
-PKG_VERSION:=1.0
+PKG_RELEASE:=0.3
+ifeq ($(KERNEL_PATCHVER),4.4)
+	PKG_VERSION:=1.1
+else
+	PKG_VERSION:=1.0
+endif
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
