@@ -7,7 +7,7 @@ PKG_LICENSE:=BSD-3-Clause
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/CreatorKit/board-test.git
+PKG_SOURCE_URL:=https://github.com/CreatorDev/board-test.git
 PKG_SOURCE_VERSION:=HEAD
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 
