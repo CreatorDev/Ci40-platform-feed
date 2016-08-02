@@ -5,8 +5,8 @@ START=98
 SERVICE_PID_FILE=/var/run/awa_bootstrapd.pid
 BINARY=/usr/bin/awa_bootstrapd
 LOGFILE=/var/log/awa_bootstrapd
-LOCAL_CONFIG=/etc/lwm2m/bootstrap-contiki.config
-FLOW_CONFIG=/etc/lwm2m/bootstrap-contiki-flow-NAT64.config
+LOCAL_CONFIG=/etc/lwm2m/contiki.bsc
+FLOW_CONFIG=/etc/lwm2m/contiki-flow-NAT64.bsc
 PORT=15683
 
 apply_global_settings() {

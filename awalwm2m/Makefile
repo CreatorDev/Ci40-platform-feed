@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 PKG_NAME:=awalwm2m
-PKG_VERSION:=0.1.10
+PKG_VERSION:=0.2.2
 #PKG_VERSION:=master
 PKG_RELEASE:=1
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
@@ -16,10 +16,13 @@ CMAKE_INSTALL:=1
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
+CMAKE_OPTIONS += -DWITH_GNUTLS=ON
+
 define Package/awalwm2m
  SECTION:=utils
  CATEGORY:=Utilities
  TITLE:=Awa LWM2M development suite by Imagination Technologies
+ DEPENDS:=+libgnutls
 endef
 define Package/awalwm2m/description
       Awa LWM2M is an implementation of the OMA Lightweight M2M protocol.
@@ -33,7 +36,7 @@ define Package/awalwm2m/install
 	$(INSTALL_DIR) $(1)/usr/include/
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include/
 	$(INSTALL_DIR) $(1)/etc/lwm2m
-	$(CP) $(PKG_BUILD_DIR)/core/bootstrap*config $(1)/etc/lwm2m
+	$(CP) $(PKG_BUILD_DIR)/config/*.bsc $(1)/etc/lwm2m
 
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_DIR) $(1)/etc/rc.d
