@@ -29,6 +29,11 @@ define Package/motion-click
   TITLE:= motion-click app
 endef
 
+define Package/bargraph-click
+  $(call Package/click-apps/Default)
+  TITLE:= bargraph-click app
+endef
+
 define Package/click-apps/description
   Click apps
 endef
@@ -46,4 +51,10 @@ define Package/motion-click/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/motion_click_app $(1)/usr/bin
 endef
 
+define Package/bargraph-click/install
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/bargraph_click_app $(1)/usr/bin
+endef
+
 $(eval $(call BuildPackage,motion-click))
+$(eval $(call BuildPackage,bargraph-click))
