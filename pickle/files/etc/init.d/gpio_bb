@@ -1,0 +1,12 @@
+#!/bin/sh /etc/rc.common
+
+START=10
+STOP=10
+
+start() {        
+	mknod /dev/gpio-bb c 180 0
+}                 
+ 
+stop() {          
+	rm /dev/gpio-bb
+}
