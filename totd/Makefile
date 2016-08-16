@@ -54,6 +54,7 @@ define Package/totd/install
 	$(INSTALL_CONF) ./files/totd.conf $(1)/etc/
 	$(INSTALL_DIR) $(1)/etc/init.d/
 	$(INSTALL_BIN) ./files/totd.init $(1)/etc/init.d/totd
+	$(INSTALL_BIN) ./files/totd_configure_dhcp $(1)/etc/init.d/
 endef
 
 $(eval $(call BuildPackage,totd))
