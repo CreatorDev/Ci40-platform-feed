@@ -9,7 +9,7 @@ PID_F=$RUN_D/$BIN.pid
 
 start() {
 	mkdir -p $RUN_D
-	$BIN -c /etc/totd.conf
+	$BIN -c /etc/totd.conf -no6
 }
 
 stop() {
