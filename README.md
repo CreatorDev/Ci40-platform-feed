@@ -12,8 +12,6 @@ Package           | Description
 awalwm2m          | Awa LWM2M is an implementation of the OMA Lightweight M2M protocol.
 board-test        | This package contains Ci40 specific board tests.
 ca8210            | This kernel module is used for cascoda ca8210 transceiver.
-cgilua            | This package has been added to use webscripts using lua pages/scripts.
-click-apps        | This package contains click applications.
 fping             | This program is used to send ICMP echo probes to network hosts, similar to ping.
 glog              | This package contains a C++ implementation of the Google logging.
 proddata          | This package provides Proddata tool used to read/write/lock OTP.
