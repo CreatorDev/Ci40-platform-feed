@@ -20,7 +20,7 @@ u-boot            | This package is used for u-boot bootloader for pistachio mar
 
 Command                                         | Description
 :---------------------------------------------- | :---------------------------------------
-```$ ./scripts/feeds/install awalwm2m```        | Install only the awalwm2m package
+```$ ./scripts/feeds install awalwm2m```        | Install only the awalwm2m package
 
 ----
 
