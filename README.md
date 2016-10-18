@@ -18,6 +18,7 @@ totd              | This package is used as IPv6 DNS for constrained devices.
 tpm-tools         | This package is used for improving equipment effectiveness.
 trousers          | This package is an open-source TCG Software Stack implementation.
 uboot-pistachio   | This package is used for u-boot bootloader for pistachio marduk platform.
+uccp420wlan       | This package contains the wifi driver.
 
 Command                                         | Description
 :---------------------------------------------- | :---------------------------------------
