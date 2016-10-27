@@ -11,8 +11,11 @@ apply_global_settings() {
 }
 
 start() {
-	apply_global_settings
-	start-stop-daemon -m -S -p $SERVICE_PID_FILE -b -x $BINARY -- -l $LOGFILE --bootstrap $BOOTSTRAP $VERBOSE
+        apply_global_settings
+        if [ -f $CERT_PATH ]; then
+                SECURITY="-s -c $CERT_PATH"
+        fi
+        start-stop-daemon -m -S -p $SERVICE_PID_FILE -b -x $BINARY -- -l $LOGFILE --bootstrap $BOOTSTRAP $SECURITY $VERBOSE
 }
 
 stop() {
