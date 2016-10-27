@@ -5,6 +5,7 @@ START=98
 SERVICE_PID_FILE=/var/run/awa_clientd.pid
 BINARY=/usr/bin/awa_clientd
 LOGFILE=/var/log/awa_clientd
+PARAMS=
 
 apply_global_settings() {
 	. /etc/config/awalwm2m
@@ -12,7 +13,17 @@ apply_global_settings() {
 
 start() {
 	apply_global_settings
-	start-stop-daemon -m -S -p $SERVICE_PID_FILE -b -x $BINARY -- -l $LOGFILE --bootstrap $BOOTSTRAP $VERBOSE
+
+	if [ -f $ENDPOINT_NAME_PATH ]; then
+		. $ENDPOINT_NAME_PATH
+  		PARAMS="$PARAMS --endPointName=$ENDPOINT_NAME "
+  	fi
+
+  	if [ -f $CERT_PATH ]; then
+    		PARAMS="$PARAMS -s -c $CERT_PATH "
+  	fi
+
+	start-stop-daemon -m -S -p $SERVICE_PID_FILE -b -x $BINARY -- -l $LOGFILE --bootstrap $BOOTSTRAP $VERBOSE $PARAMS
 }
 
 stop() {
