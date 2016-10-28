@@ -3,4 +3,4 @@ INTERFACE=lowpan0
 ADDRESS_FAMILY=6
 VERBOSE=--verbose
 ENDPOINT_NAME_PATH=/etc/creator/endPointName
-CERT_PATH=/etc/creator/Ci40.crt
+CERT_PATH=/etc/creator/endpoint.crt
