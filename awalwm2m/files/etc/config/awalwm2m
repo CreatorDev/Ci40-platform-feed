@@ -2,3 +2,5 @@ BOOTSTRAP=coaps://deviceserver.flowcloud.systems:15684
 INTERFACE=lowpan0
 ADDRESS_FAMILY=6
 VERBOSE=--verbose
+ENDPOINT_NAME_PATH=/etc/creator/endPointName
+CERT_PATH=/etc/creator/endpoint.crt
