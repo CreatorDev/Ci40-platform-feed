@@ -1,0 +1,13 @@
+#!/bin/sh /etc/rc.common
+
+START=10
+STOP=10
+
+start() {
+	modprobe mac80211
+	insmod uccp420wlan $wifiaddr
+}
+
+stop() {
+	rmmod uccp420wlan
+}
