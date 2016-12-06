@@ -1,0 +1,21 @@
+diff --git a/Module/ca8210.c b/Module/ca8210.c
+index 2846d7f..9585058 100644
+--- a/Module/ca8210.c
++++ b/Module/ca8210.c
+@@ -2217,6 +2217,8 @@ static void ca8210_async_tx_worker(struct work_struct *work)
+ 		return;
+ 	}
+ 
++    msleep(45);
++
+ 	ret = ca8210_skb_tx(priv->tx_skb, priv->nextmsduhandle, priv);
+ 	if (ret < 0) {
+ 		dev_warn(
+@@ -2348,6 +2350,7 @@ static int ca8210_xmit_sync(struct ieee802154_hw *hw, struct sk_buff *skb)
+ 	struct ca8210_priv *priv = hw->priv;
+ 	int status;
+ 
++    msleep(45);
+ 	dev_dbg(&priv->spi->dev, "calling ca8210_xmit_sync()\n");
+ 
+ 	status = ca8210_skb_tx(skb, priv->nextmsduhandle++, priv);
