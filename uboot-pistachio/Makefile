@@ -51,8 +51,8 @@ endef
 
 define Package/uboot/install/Default
 	$(CP) \
-		$(PKG_BUILD_DIR)/u-boot-pistachio-nor.img \
-		$(BIN_DIR)/uboot-$(BOARD)-$(1)-$(PKG_SOURCE_VERSION).img
+		$(PKG_BUILD_DIR)/u-boot-pistachio*.img \
+		$(BIN_DIR)/
 endef
 
 define Package/uboot/install/template
