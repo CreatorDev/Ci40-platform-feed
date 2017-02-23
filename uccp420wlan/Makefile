@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=uccp420wlan
-PKG_VERSION:=6.9
+PKG_VERSION:=6.9.1
 PKG_RELEASE=1
 
 PKG_LICENSE:=GPL-2.0+
